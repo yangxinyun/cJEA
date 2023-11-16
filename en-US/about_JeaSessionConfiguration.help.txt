@@ -1,0 +1,181 @@
+.NAME
+    JeaSessionConfiguration
+
+.SYNOPSIS
+    The JeaSessionConfiguration DSC resource configures the PowerShell session
+    configurations, which define the mapping of users to roles and general
+    session security settings.
+
+.DESCRIPTION
+    The JeaSessionConfiguration DSC resource configures the PowerShell session
+    configurations, which define the mapping of users to roles and general
+    session security settings.
+
+    >Note: Scriptblock logging is not enabled by this resource and should
+    >be done using the https://docs.microsoft.com/en-us/powershell/dsc/registryresource.
+
+.PARAMETER Ensure
+    Write - Ensure
+    The optional state that ensures the endpoint is present or absent. The
+    default value is [Ensure]::Present.
+
+.PARAMETER Name
+    Key - string
+    The mandatory endpoint name. Uses 'Microsoft.PowerShell' by default.
+
+.PARAMETER RoleDefinitions
+    Write - string
+    The role definition map to be used for the endpoint. This should be a string
+    that represents the Hashtable used for the RoleDefinitions property in
+    New-PSSessionConfigurationFile, such as:
+    `
+    RoleDefinitions = '@{ Everyone = @{ RoleCapabilities = "BaseJeaCapabilities" } }'
+    `
+
+.PARAMETER RunAsVirtualAccount
+    Write - nullable[bool]
+    Run the endpoint under a Virtual Account.
+
+.PARAMETER RunAsVirtualAccountGroups
+    Write - string[]
+    The optional groups to be used when the endpoint is configured to run as a
+    Virtual Account
+
+.PARAMETER GroupManagedServiceAccount
+    Write - string
+    The optional Group Managed Service Account (GMSA) to use for this endpoint.
+    If configured, will disable the default behavior of running as a Virtual
+    Account.
+
+.PARAMETER TranscriptDirectory
+    Write - string
+    The optional directory for transcripts to be saved to.
+
+.PARAMETER ScriptsToProcess
+    Write - string[]
+    The optional startup script for the endpoint.
+
+.PARAMETER SessionType
+    Write - string
+    The optional session type for the endpoint.
+
+.PARAMETER MountUserDrive
+    Write - bool
+    The optional switch to enable mounting of a restricted user drive.
+
+.PARAMETER UserDriveMaximumSize
+    Write - long
+    The optional size of the user drive. The default is 50MB.
+
+.PARAMETER RequiredGroups
+    Write - string[]
+    The optional expression declaring which domain groups (for example,
+    two-factor authenticated users) connected users must be members of. This
+    should be a string that represents the Hashtable used for the RequiredGroups
+    property in New-PSSessionConfigurationFile, such as:
+    `
+    RequiredGroups = '@{ And = "RequiredGroup1", @{ Or = "OptionalGroup1", "OptionalGroup2" } }'
+    `
+
+.PARAMETER ModulesToImport
+    Write - string[]
+    The optional modules to import when applied to a session. This should be
+    a string that represents a string, a Hashtable, or array of strings and/or
+    Hashtables.
+    `
+    ModulesToImport = "'MyCustomModule', @{ ModuleName = 'MyCustomModule'; ModuleVersion = '1.0.0.0'; GUID = '4d30d5f0-cb16-4898-812d-f20a6c596bdf' }"
+    `
+
+.PARAMETER VisibleAliases
+    Write - string[]
+    The optional aliases to make visible when applied to a session.
+
+.PARAMETER VisibleCmdlets
+    Write - string[]
+    The optional cmdlets to make visible when applied to a session. This should
+    be a string that represents a string, a Hashtable, or array of strings and/or
+    Hashtables.
+    `
+    VisibleCmdlets = "'Invoke-Cmdlet1', @{ Name = 'Invoke-Cmdlet2'; Parameters = @{ Name = 'Parameter1'; ValidateSet = 'Item1', 'Item2' }, @{ Name = 'Parameter2'; ValidatePattern = 'L*' } }"
+    `
+
+.PARAMETER VisibleFunctions
+    Write - string[]
+    The optional functions to make visible when applied to a session. This should
+    be a string that represents a string, a Hashtable, or array of strings and/or
+    Hashtables.
+    `
+    VisibleFunctions = "'Invoke-Function1', @{ Name = 'Invoke-Function2'; Parameters = @{ Name = 'Parameter1'; ValidateSet = 'Item1', 'Item2' }, @{ Name = 'Parameter2'; ValidatePattern = 'L*' } }"
+    `
+
+.PARAMETER VisibleExternalCommands
+    Write - string[]
+    The optional external commands (scripts and applications) to make visible when applied to a session.
+
+.PARAMETER VisibleProviders
+    Write - string[]
+    The optional providers to make visible when applied to a session.
+
+.PARAMETER AliasDefinitions
+    Write - string[]
+    The optional aliases to be defined when applied to a session. This should be
+    a string that represents a Hashtable or array of Hashtable.
+    `
+    AliasDefinitions = "@{ Name = 'Alias1'; Value = 'Invoke-Alias1'}, @{ Name = 'Alias2'; Value = 'Invoke-Alias2'}"
+    `
+
+.PARAMETER FunctionDefinitions
+    Write - string[]
+    The optional functions to define when applied to a session. This should be
+    a string that represents a Hashtable or array of Hashtable.
+    `
+    FunctionDefinitions = "@{ Name = 'MyFunction'; ScriptBlock = { param($MyInput) $MyInput } }"
+    `
+
+.PARAMETER VariableDefinitions
+    Write - string
+    The optional variables to define when applied to a session. This should be
+    a string that represents a Hashtable or array of Hashtable.
+    `
+    VariableDefinitions = "@{ Name = 'Variable1'; Value = { 'Dynamic' + 'InitialValue' } }, @{ Name = 'Variable2'; Value = 'StaticInitialValue' }"
+    `
+
+.PARAMETER EnvironmentVariables
+    Write - string
+    The optional environment variables to define when applied to a session.
+    This should be a string that represents a Hashtable.
+    `
+    EnvironmentVariables = "@{ Variable1 = 'Value1'; Variable2 = 'Value2' }"
+    `
+
+.PARAMETER TypesToProcess
+    Write - string[]
+    The optional type files (.ps1xml) to load when applied to a session.
+
+.PARAMETER FormatsToProcess
+    Write - string[]
+    The optional format files (.ps1xml) to load when applied to a session.
+
+.PARAMETER AssembliesToLoad
+    Write - string[]
+    The optional assemblies to load when applied to a session.
+
+.PARAMETER LanguageMode
+    Write - string
+    The optional language mode to load. Can be 'NoLanguage' (recommended),
+    'RestrictedLanguage', 'ConstrainedLanguage', or 'FullLanguage' (Default).
+
+.PARAMETER ExecutionPolicy
+    Write - string
+    The optional ExecutionPolicy. Execution policy to apply when applied to a
+    session. 'Unrestricted', 'RemoteSigned', 'AllSigned', 'Restricted',
+    'Default', 'Bypass', 'Undefined'.
+
+.PARAMETER HungRegistrationTimeout
+    Write - int
+    The optional number of seconds to wait for registering the endpoint to complete.
+    Use 0 for no timeout. Default value is 10.
+
+.PARAMETER Reasons
+    Read - Reason[]
+    Contains the not compliant properties detected in Get() method.
