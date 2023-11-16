@@ -32,7 +32,7 @@
 
     PSData = @{
 
-      Tags         = @('DesiredStateConfiguration', 'DSC', 'DSCResource', 'JEA', 'JustEnoughAdministration', 'Role', 'Capability', 'Role Capability', 'Session', 'Configuration', 'Session Configuration')
+      Tags         = @('DesiredStateConfiguration', 'DSC', 'DSCResource', 'JEA', 'JustEnoughAdministration', 'Role', 'Capability', 'RoleCapability', 'Session', 'Configuration', 'SessionConfiguration')
 
       LicenseUri   = 'https://github.com/yangxinyun/cJEA/blob/main/LICENSE'
 
