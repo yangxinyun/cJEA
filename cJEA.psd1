@@ -34,9 +34,9 @@
 
       Tags         = @('DesiredStateConfiguration', 'DSC', 'DSCResource', 'JEA', 'JustEnoughAdministration', 'Role', 'Capability', 'Role Capability', 'Session', 'Configuration', 'Session Configuration')
 
-      LicenseUri   = 'https://github.com/dsccommunity/JeaDsc/blob/master/LICENSE'
+      LicenseUri   = 'https://github.com/yangxinyun/cJEA/blob/main/LICENSE'
 
-      ProjectUri   = 'https://github.com/dsccommunity/JeaDsc'
+      ProjectUri   = 'https://github.com/yangxinyun/cJEA'
 
       IconUri      = 'https://vectorified.com/images/powershell-icon-20.png'
 
