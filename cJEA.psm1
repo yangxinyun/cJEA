@@ -163,11 +163,11 @@ class SessionConfigurationUtility
 
             if ($Path)
             {
-                $registerString = "`$null = Register-PSSessionConfiguration -Name '$Name' -Path '$Path' -NoServiceRestart -Force -ErrorAction 'Stop' -WarningAction 'SilentlyContinue'"
+                $registerString = "`$null = Register-PSSessionConfiguration -Name '$Name' -Path '$Path' -NoServiceRestart -ErrorAction 'Stop' -WarningAction 'SilentlyContinue'"
             }
             else
             {
-                $registerString = "`$null = Register-PSSessionConfiguration -Name '$Name' -NoServiceRestart -Force -ErrorAction 'Stop' -WarningAction 'SilentlyContinue'"
+                $registerString = "`$null = Register-PSSessionConfiguration -Name '$Name' -NoServiceRestart -ErrorAction 'Stop' -WarningAction 'SilentlyContinue'"
             }
 
             $registerScriptBlock = [scriptblock]::Create($registerString)
